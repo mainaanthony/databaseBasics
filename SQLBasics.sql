@@ -1,0 +1,100 @@
+create schema bookstore
+
+
+
+create Database Bookstore
+
+
+create table bookstore.laptops(
+   laptopId INT PRIMARY KEY NOT NULL,
+   LaptopName VARCHAR(255)
+
+)
+
+select * FROM bookstore.laptops
+
+
+
+CREATE TABLE AUTHORS (
+
+AUTHORID INT PRIMARY KEY,
+FirstName VARCHAR(255),
+LastName VARCHAR (255)
+);
+
+
+CREATE TABLE BOOKS(
+BookID INT PRIMARY KEY,
+TITLE VARCHAR(255),
+AUTHORID INT,
+FOREIGN KEY (AUTHORID) REFERENCES AUTHORS
+
+);
+
+INSERT INTO AUTHORS(
+AUTHORID, FirstName, LastName
+)
+VALUES 
+(1, 'John', 'Doe'),
+(2, 'Jane', 'Smith'),
+(3, 'David', 'Johnson')
+
+
+INSERT INTO BOOKS(BookID,TITLE, AUTHORID)
+VALUES
+(1, 'BOOK1', 1),
+(2, 'BOOK2', 2),
+(3, 'BOOK3', 3)
+
+
+SELECT * FROM BOOKS 
+WHERE TITLE='BOOK2'
+
+
+UPDATE AUTHORS
+SET LastName = 'Smithson'
+WHERE AUTHORID IN (
+
+     SELECT AUTHORID FROM BOOKS
+	 WHERE BOOKID = 1
+
+)
+
+SELECT * FROM AUTHORS
+
+
+
+
+
+
+SELECT 
+COUNT(BOOKID)
+FROM BOOKS
+
+
+
+
+
+SELECT pod.BOOKID, pod.TITLE, pod.AUTHORID, poh.FirstName, poh.LastName
+FROM  BOOKS pod
+ INNER JOIN
+ AUTHORS poh
+ ON pod.AUTHORID = poh.AUTHORID
+
+
+
+ DELETE
+ FROM BOOKS
+ WHERE BOOKID=3
+
+ DELETE
+ FROM AUTHORS
+ WHERE AUTHORID=3
+
+ SELECT * FROM BOOKS
+
+
+ SELECT * FROM AUTHORS
+
+
+
